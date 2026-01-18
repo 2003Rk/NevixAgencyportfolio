@@ -41,6 +41,9 @@ const Hero = () => {
 		const startValue = isMobile ? "top 50%" : "top top";
 		const endValue = isMobile ? "120% top" : "bottom top";
 
+		// Set initial state
+		gsap.set("#hero", { opacity: 1, y: 0, scale: 1 });
+
 		let tl = gsap.timeline({
 			scrollTrigger: {
 				trigger: "#hero",
@@ -48,6 +51,20 @@ const Hero = () => {
 				end: endValue,
 				scrub: true,
 				pin: true,
+				onLeave: () => {
+					gsap.set("#hero", { 
+						opacity: 0, 
+						y: -100,
+						scale: 0.95,
+					});
+				},
+				onEnterBack: () => {
+					gsap.set("#hero", { 
+						opacity: 1, 
+						y: 0,
+						scale: 1,
+					});
+				}
 			},
 		});
 
