@@ -116,7 +116,7 @@ const ServicesWorkflow = () => {
       title: "Web Development",
       description: "Next-generation web applications built with React and Three.js. Experience seamless performance and immersive 3D interactions tailored for conversion.",
       features: ["Responsive 3D Interfaces", "Scalable Cloud Architecture", "Optimized Core Web Vitals"],
-      image: "public/images/web.png",
+      image: "/images/web.png",
       imagePosition: "right"
     },
     {
@@ -125,7 +125,7 @@ const ServicesWorkflow = () => {
       title: "App Development",
       description: "iOS and Android solutions with premium glassmorphic UI. Our mobile apps are designed for speed and intuitive user journeys that keep users engaged.",
       features: ["Native Performance", "Cross-Platform Unity", "Biometric Integration"],
-      image: "public/images/phone.png",
+      image: "/images/phone.png",
       imagePosition: "left",
       imageSize: "max-w-[300px]"
     },
@@ -135,7 +135,7 @@ const ServicesWorkflow = () => {
       title: "Automation & AI",
       description: "AI-driven workflow optimization. We build autonomous systems that handle complex data processing, leaving your team to focus on high-value creative work.",
       features: ["Custom LLM Workflows", "Real-time Data Sync", "Predictive Analytics"],
-      image: "public/images/automation.png",
+      image: "/images/automation.png",
       imagePosition: "right",
       imageSize: "max-w-[300px]"
     }
