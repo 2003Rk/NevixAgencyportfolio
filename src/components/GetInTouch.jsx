@@ -1,9 +1,88 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger, SplitText } from 'gsap/all';
 import { useGSAP } from '@gsap/react';
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
+
+// 3D Tilt Card Component
+const TiltCard = ({ children, className }) => {
+  const cardRef = useRef(null);
+  const glareRef = useRef(null);
+
+  const handleMouseMove = (e) => {
+    const card = cardRef.current;
+    const glare = glareRef.current;
+    if (!card) return;
+
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+
+    const rotateX = ((y - centerY) / centerY) * -15;
+    const rotateY = ((x - centerX) / centerX) * 15;
+
+    gsap.to(card, {
+      rotateX: rotateX,
+      rotateY: rotateY,
+      scale: 1.05,
+      duration: 0.3,
+      ease: 'power2.out',
+      transformPerspective: 1000,
+      transformOrigin: 'center center',
+    });
+
+    if (glare) {
+      const glareX = (x / rect.width) * 100;
+      const glareY = (y / rect.height) * 100;
+      gsap.to(glare, {
+        opacity: 0.15,
+        background: `radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255,255,255,0.4) 0%, transparent 60%)`,
+        duration: 0.3,
+      });
+    }
+  };
+
+  const handleMouseLeave = () => {
+    const card = cardRef.current;
+    const glare = glareRef.current;
+    if (!card) return;
+
+    gsap.to(card, {
+      rotateX: 0,
+      rotateY: 0,
+      scale: 1,
+      duration: 0.5,
+      ease: 'elastic.out(1, 0.5)',
+    });
+
+    if (glare) {
+      gsap.to(glare, {
+        opacity: 0,
+        duration: 0.3,
+      });
+    }
+  };
+
+  return (
+    <div
+      ref={cardRef}
+      className={className}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{ transformStyle: 'preserve-3d' }}
+    >
+      {children}
+      <div
+        ref={glareRef}
+        className="absolute inset-0 rounded-3xl pointer-events-none opacity-0"
+        style={{ zIndex: 10 }}
+      />
+    </div>
+  );
+};
 
 const GetInTouch = () => {
   const teamMembers = [
@@ -20,7 +99,7 @@ const GetInTouch = () => {
     },
     {
       id: 2,
-      name: "Kunar Kumar",
+      name: "Kunal Kumar",
       lastName: "Sahu",
       role: "Co-Founder, UI/UX Designer",
       image: "/images/profile2.png",
@@ -146,13 +225,13 @@ const GetInTouch = () => {
         </div>
 
         {/* Team Cards */}
-        <div className="team-cards-container flex flex-col md:flex-row items-center justify-center gap-6 md:gap-8 mt-20">
+        <div className="team-cards-container flex flex-col md:flex-row items-center justify-center gap-6 md:gap-8 mt-20" style={{ perspective: '1000px' }}>
           {teamMembers.map((member, index) => (
-            <div
+            <TiltCard
               key={member.id}
-              className={`team-card relative ${index === 0 ? 'md:-rotate-3' : index === 2 ? 'md:rotate-3' : ''}`}
+              className={`team-card relative cursor-pointer ${index === 0 ? 'md:-rotate-3' : index === 2 ? 'md:rotate-3' : ''}`}
             >
-              <div className="bg-zinc-900/80 backdrop-blur-sm rounded-3xl p-6 md:p-8 w-[280px] md:w-[300px] border border-white/5 shadow-2xl shadow-black/50">
+              <div className="bg-zinc-900/80 backdrop-blur-sm rounded-3xl p-6 md:p-8 w-[280px] md:w-[300px] border border-white/5 shadow-2xl shadow-black/50 transition-shadow duration-300 hover:shadow-red-500/20 hover:border-white/10" style={{ transform: 'translateZ(20px)' }}>
                 {/* Profile Image */}
                 <div className="flex justify-center mb-6">
                   <div className="relative w-28 h-28 md:w-32 md:h-32">
@@ -214,7 +293,7 @@ const GetInTouch = () => {
                   </a>
                 </div>
               </div>
-            </div>
+            </TiltCard>
           ))}
         </div>
 
