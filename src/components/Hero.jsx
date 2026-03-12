@@ -67,12 +67,6 @@ const Hero = () => {
 				}
 			},
 		});
-
-		videoRef.current.onloadedmetadata = () => {
-			tl.to(videoRef.current, {
-				currentTime: videoRef.current.duration,
-			});
-		};
 	}, []);
 
 	return (
@@ -111,16 +105,13 @@ const Hero = () => {
 					</div>
 				</nav>
 
-				{/* === Background Video === */}
-				<video
+				{/* === Background Image === */}
+				<img
 					ref={videoRef}
-					muted
-					playsInline
-					preload="auto"
-					autoPlay
-					loop
 					className="absolute inset-0 w-full h-full object-cover"
-					src="/videos/output.mp4"
+					style={{ transform: 'scale(1.3)' }}
+					src="/videos/Gemini_Generated_Image_5wmqsh5wmqsh5wmq.png"
+					alt="Background"
 				/>
 
 				{/* === Dark Overlay === */}

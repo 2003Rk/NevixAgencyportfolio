@@ -13,33 +13,24 @@ const FeaturedWork = () => {
   const projects = [
     {
       id: 1,
-      title: "MVP Design Sprint for an Ambitious Startup",
-      image: "/images/abt1.png",
-      tags: ["Product Design", "Website"]
+      title: "Next Class - Student Management Mobile App",
+      image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&q=80",
+      tags: ["Mobile App", "UI/UX", "Education Tech"],
+      link: "https://play.google.com/store/apps/details?id=com.mindslate.next_class"
     },
     {
       id: 2,
-      title: "Brand Identity Design for a Newly Merged AI Venture",
-      image: "/images/abt2.png",
-      tags: ["Brand Strategy", "Merch", "Pitch Decks"]
+      title: "FitBuddy - Fitness & Workout Companion App",
+      image: "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=800&q=80",
+      tags: ["Mobile App", "Health & Fitness", "UI/UX"],
+      link: "https://play.google.com/store/apps/details?id=com.rahul.fitbuddy"
     },
     {
       id: 3,
-      title: "Brand Revamp to Empower Global Expansion Plans",
-      image: "/images/abt3.png",
-      tags: ["Brand Identity"]
-    },
-    {
-      id: 4,
-      title: "E-commerce Platform Redesign",
-      image: "/images/abt4.png",
-      tags: ["UI/UX", "Development"]
-    },
-    {
-      id: 5,
-      title: "Mobile App for Healthcare Innovation",
-      image: "/images/abt5.png",
-      tags: ["App Design", "Strategy"]
+      title: "ChaiLights - iOS Application",
+      image: "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&q=80",
+      tags: ["iOS App", "Mobile Design", "Development"],
+      link: "https://apps.apple.com/in/app/chailights/id6756733163"
     }
   ];
 
@@ -236,7 +227,12 @@ const FeaturedWork = () => {
 
             {/* Center Active Card */}
             <div className="project-card w-full max-w-[400px] md:max-w-[500px] lg:max-w-[600px] flex-shrink-0 z-10">
-              <div className="relative overflow-hidden rounded-2xl bg-zinc-900 aspect-[16/10] shadow-2xl shadow-black/50">
+              <a 
+                href={current.link} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className={`block relative overflow-hidden rounded-2xl bg-zinc-900 aspect-[16/10] shadow-2xl shadow-black/50 ${current.link ? 'cursor-pointer hover:scale-[1.02] transition-transform duration-300' : ''}`}
+              >
                 <img 
                   src={current.image} 
                   alt={current.title}
@@ -251,7 +247,7 @@ const FeaturedWork = () => {
                     {/* You can add a logo here if needed */}
                   </div>
                 </div>
-              </div>
+              </a>
               
               {/* Active Project Info */}
               <div className="text-center mt-8">
