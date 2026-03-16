@@ -157,8 +157,8 @@ const About = () => {
 						<div className="about-image flex-1 w-full">
 							<div className="rounded-2xl overflow-hidden border border-white/10 bg-gradient-to-br from-[#0a1628]/80 to-[#0d0d0d]/90 p-2">
 								<img 
-									src="/images/abt2.png" 
-									alt="3D Visualization" 
+									src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80" 
+									alt="Ecommerce Platform" 
 									className="w-full h-64 md:h-80 object-cover rounded-xl"
 								/>
 							</div>
